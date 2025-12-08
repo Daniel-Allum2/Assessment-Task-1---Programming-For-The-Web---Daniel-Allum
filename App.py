@@ -20,9 +20,7 @@ def index():
 def movie_page(id):
     db = sqlite3.connect(DB)
     db.row_factory = sqlite3.Row
-
     movie = db.execute("SELECT * FROM Movies WHERE id = ?", (id,)).fetchone()
-
     reviews = db.execute(
         """
         SELECT Reviews.*, Users.username 
@@ -35,6 +33,21 @@ def movie_page(id):
 
     db.close()
     return render_template("movie.html", movie=movie, reviews=reviews)
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = generate_password_hash(request.form["password"])
+        db = sqlite3.connect(DB)
+        db.execute(
+            "INSERT INTO Users (username, password) VALUES (?, ?)", (username, password)
+        )
+        db.commit()
+        db.close()
+        return redirect("/login")
+    return render_template("register.html")
 
 
 app.run(debug=True, port=5000)
