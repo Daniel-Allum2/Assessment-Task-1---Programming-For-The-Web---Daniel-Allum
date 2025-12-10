@@ -57,7 +57,9 @@ def login():
         password = request.form["password"]
         db = sqlite3.connect(DB)
         db.row_factory = sqlite3.Row
-        user = db.execute("SELECT * FROM Users WHERE username = ?", (username,)).fet
+        user = db.execute(
+            "SELECT * FROM Users WHERE username = ?", (username,)
+        ).fetchone()
         db.close()
 
         if user and check_password_hash(user["password"], password):
