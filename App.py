@@ -76,4 +76,24 @@ def Logout():
     return redirect("/")
 
 
+@app.route("/movie/<int:id>/add_review", methods=["POST"])
+def add_review(id):
+    if "user_id" not in session:
+        return "Please log in before leaving a review"
+    rating = request.form["Rating"]
+    review = request.form["Review"]
+    db = sqlite3.connect(DB)
+    db.execute(
+        """
+        INSERT INTO Reviews (Date, Review, Rating, MovieID, UserID)
+        VALUES (CURRENT_DATE, ?, ?, ?, ?)
+    """,
+        (review, rating, id, session["user_id"]),
+    )
+
+    db.commit()
+    db.close()
+    return redirect(f"/movie/{id}")
+
+
 app.run(debug=True, port=5000)
