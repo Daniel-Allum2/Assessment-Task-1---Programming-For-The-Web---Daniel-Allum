@@ -96,4 +96,21 @@ def add_review(id):
     return redirect(f"/movie/{id}")
 
 
+@app.route("/review/<int:id>/delete")
+def delete_review(id):
+    if "user_id" not in session:
+        return "Please log in before deleting your review"
+    db = sqlite3.connect(DB)
+    db.row_factory = sqlite3.Row
+    review = db.execute("SELECT * FROM Reviews WHERE id = ?", (id,)).fetchone()
+
+    if review["UserID"] != session["user_id"]:
+        db.close()
+        return "Not allowed"
+    db.execute("DELETE FROM Reviews WHERE id = ?", (id,))
+    db.commit()
+    db.close()
+    return redirect("/")
+
+
 app.run(debug=True, port=5000)
