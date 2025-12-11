@@ -1,0 +1,22 @@
+body {
+  font-family: "Segoe UI";
+}
+
+nav {
+  font-size: 20px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 40px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-family: Calibri;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
