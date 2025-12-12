@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block content %}
+
+<h1>Edit Review</h1>
+
+<form method="POST">
+  <label for="Rating">Rating (1-5):</label>
+  <input
+    type="number"
+    id="Rating"
+    name="Rating"
+    min="1"
+    max="5"
+    value="{{ review.Rating }}"
+    required
+  />
+
+  <label for="Review">Review:</label>
+  <textarea id="Review" name="Review" required>{{ review.Review }}</textarea>
+
+  <button type="submit">Save Changes</button>
+</form>
+
+{% endblock %}

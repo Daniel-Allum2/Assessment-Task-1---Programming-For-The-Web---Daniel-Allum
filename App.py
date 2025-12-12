@@ -136,7 +136,7 @@ def edit_review(id):
         db.close()
         return redirect(f"/movie/{review['MovieID']}")
     db.close()
-    return render_template("edit_review.html")
+    return render_template("edit_review.html", review=review)
 
 
 app.run(debug=True, port=5000)
