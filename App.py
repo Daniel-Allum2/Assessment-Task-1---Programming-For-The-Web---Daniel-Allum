@@ -22,15 +22,9 @@ def movie_page(id):
     db.row_factory = sqlite3.Row
     movie = db.execute("SELECT * FROM Movies WHERE id = ?", (id,)).fetchone()
     reviews = db.execute(
-        """
-        SELECT Reviews.*, Users.username 
-        FROM Reviews 
-        JOIN Users ON Reviews.UserID = Users.id
-        WHERE MovieID = ?
-    """,
+        """SELECT Reviews.*, Users.username FROM Reviews JOIN Users ON Reviews.UserID = Users.id WHERE MovieID = ?""",
         (id,),
     ).fetchall()
-
     db.close()
     return render_template("movie.html", movie=movie, reviews=reviews)
 
@@ -84,13 +78,9 @@ def add_review(id):
     review = request.form["Review"]
     db = sqlite3.connect(DB)
     db.execute(
-        """
-        INSERT INTO Reviews (Date, Review, Rating, MovieID, UserID)
-        VALUES (CURRENT_DATE, ?, ?, ?, ?)
-    """,
+        """INSERT INTO Reviews (Date, Review, Rating, MovieID, UserID) VALUES (CURRENT_DATE, ?, ?, ?, ?)""",
         (review, rating, id, session["user_id"]),
     )
-
     db.commit()
     db.close()
     return redirect(f"/movie/{id}")
@@ -135,7 +125,6 @@ def edit_review(id):
         db.commit()
         db.close()
         return redirect(f"/movie/{review['MovieID']}")
-    db.close()
     return render_template("edit_review.html", review=review)
 
 
