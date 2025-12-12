@@ -13,6 +13,7 @@
   <p>{{ r.review }}</p>
 
   {% if r.UserID == session.user_id %}
+  <a href="/review/{{ r.id }}/edit">Edit</a>
   <a href="/review/{{ r.id }}/delete">Delete</a>
   {% endif %}
 </div>

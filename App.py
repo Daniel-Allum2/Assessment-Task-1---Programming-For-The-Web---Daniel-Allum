@@ -113,4 +113,30 @@ def delete_review(id):
     return redirect("/")
 
 
+@app.route("/review/<int:id>/edit", methods=["GET", "POST"])
+def edit_review(id):
+    if "user_id" not in session:
+        return "Please log in before editing your review"
+    db = sqlite3.connect(DB)
+    db.row_factory = sqlite3.Row
+    review = db.execute("SELECT * FROM Reviews WHERE id = ?", (id,)).fetchone()
+
+    if review["UserID"] != session["user_id"]:
+        db.close()
+        return "Invalid request"
+    if request.method == "POST":
+        new_text = request.form["Review"]
+        new_rating = request.form["Rating"]
+
+        db.execute(
+            "UPDATE Reviews SET Review = ?, Rating = ? WHERE id = ?",
+            (new_text, new_rating, id),
+        )
+        db.commit()
+        db.close()
+        return redirect(f"/movie/{review['MovieID']}")
+    db.close()
+    return render_template("edit_review.html")
+
+
 app.run(debug=True, port=5000)
