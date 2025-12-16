@@ -106,3 +106,16 @@ h1 + p {
 .review-box a:hover {
   text-decoration: underline;
 }
+
+form {
+  padding: 20px;
+  margin: 25px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
