@@ -88,3 +88,21 @@ h1 + p {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+.review-box strong {
+  font-size: 18px;
+}
+
+.review-box a {
+  margin-right: 15px;
+  font-weight: bold;
+  color: #0074ff;
+}
+
+.review-box a[href*="delete"] {
+  color: #d9534f;
+}
+
+.review-box a:hover {
+  text-decoration: underline;
+}
