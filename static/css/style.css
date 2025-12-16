@@ -59,3 +59,13 @@ h3 {
 .movie-card h2 {
   margin-top: 0;
 }
+
+.movie-card a {
+  color: white;
+  background: #0074ff;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
