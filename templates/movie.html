@@ -25,8 +25,15 @@
 <h3>Add Review</h3>
 
 <form method="POST" action="/movie/{{ movie.id}}/add_review">
-  <label>Rating:</label>
-  <input type="number" name="Rating" min="1" max="5" required />
+  <label for="Rating:">Rating:</label>
+  <select name="Rating" id="Rating" required>
+    <option value="">Select a rating</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
 
   <label>Review:</label>
   <textarea name="Review"></textarea>
