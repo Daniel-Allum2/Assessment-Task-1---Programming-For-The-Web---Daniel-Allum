@@ -70,6 +70,10 @@ h3 {
   border-radius: 6px;
 }
 
+.movie-card a:hover {
+  background: #0057c7;
+}
+
 h1 + p {
   padding: 20px;
   margin: 20px 0;
@@ -138,4 +142,20 @@ form textarea {
   border: 1px solid #ccc;
   font-size: 15px;
   box-sizing: border-box;
+}
+
+form button {
+  margin-top: 15px;
+  background: #0074ff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #0057c7;
 }
